@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="app_name">PictureFrame</string>
+  <string name="path">/storage/emulated/0/Threema/Threema Pictures</string>
+</resources>
