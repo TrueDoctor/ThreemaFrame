@@ -17,9 +17,14 @@ using Uri = Android.Net.Uri;
 
 namespace PictureFrame
 {
-    
-    [Activity(Label = "PictureFrame", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation,
-        ScreenOrientation = ScreenOrientation.Landscape)] //This is what controls orientation
+    using Android.Service.Notification;
+
+    using PictureFrame.Properties;
+
+
+    using View = Android.Views.View;
+
+    [Activity(Label = "PictureFrame", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize)] //This is what controls orientation
     public class MainActivity : Activity
     {
         private ImageView view;
@@ -50,39 +55,56 @@ namespace PictureFrame
             newUiOptions |= (int)SystemUiFlags.ImmersiveSticky;
             decorView.SystemUiVisibility = (StatusBarVisibility)newUiOptions;
 
+            StartService(new Intent(this, typeof(NotificationListenerService)));
+
             PictureSelect.OnReload(this, EventArgs.Empty);
+            
+            Utility.StartTimer(this);
             OnUpdate(this, EventArgs.Empty);
 
-            Utility.StartTimer(this);
 
-
-            view.Click += delegate
-            {
-                //view.SetImageURI(Uri.Parse(PictureSelect.OnChange().name));
-                OnUpdate(this, EventArgs.Empty);
-                Utility.timer.Stop();
-                Utility.timer.Start();
-                
-            };
+            view.Click += this.OnClick;
+            this.view.Drag += OnDrag;
             
         }
         
         public void OnUpdate(object o, EventArgs e)
         {
-            
             var pic = PictureSelect.OnChange();
             PictureSelect.OnReload(this, EventArgs.Empty);
-
+            Utility.timer.Interval = Utility.DefaultIntervall;
             
-            RunOnUiThread(() =>
+            this.RunOnUiThread(() =>
             {
                 view.SystemUiVisibility =
                     (StatusBarVisibility)View.SystemUiFlagHideNavigation;
+                try
+                {
+                    view.SetImageURI(Uri.Parse(pic.name));
+                }
+                catch (Exception r)
+                {
+                    Toast.MakeText(this, r.ToString(), ToastLength.Long).Show();
 
-                view.Rotation = Utility.ConvertRotation(pic.orientation);
-                view.SetImageURI(Uri.Parse(pic.name));
+                    OnUpdate(this, EventArgs.Empty);
+                }
             });
         }
 
+        public void OnClick(object o, EventArgs e)
+        {
+            OnUpdate(this, EventArgs.Empty);
+            Utility.timer.Stop();
+            Utility.timer.Interval = Utility.DefaultIntervall * 4;
+            Utility.timer.Start();
+        }
+
+        public void OnDrag(object o, EventArgs e)
+        {
+            OnUpdate(this, EventArgs.Empty);
+            Utility.timer.Stop();
+            Utility.timer.Interval = Utility.DefaultIntervall / 30;
+            Utility.timer.Start();
+        }
     }
 }

@@ -1,11 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="PictureFrame.PictureFrame" android:versionCode="1" android:versionName="1.5.3" android:installLocation="preferExternal">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="PictureFrame.PictureFrame" android:installLocation="preferExternal" android:versionCode="1" android:versionName="1.5.3">
 	<uses-sdk android:minSdkVersion="14" android:targetSdkVersion="24" />
-	<uses-permission android:name="android.permission.WAKE_LOCK" />
-	<uses-permission android:name="android.permission.SET_ORIENTATION" />
-	<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-	<uses-permission android:name="android.permission.READ_USER_DICTIONARY" />
-	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-	<uses-permission android:name="android.permission.WRITE_USER_DICTIONARY" />
-	<application android:allowBackup="true" android:icon="@drawable/bilderrahmen" android:label="@string/app_name"></application>
+	<uses-permission android:name="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE" />
+	<application android:allowBackup="true" android:label="@string/app_name">
+		<intent-filter>
+			<action android:name="android.service.notification.NotificationListenerService" />
+		</intent-filter>
+	</application>
 </manifest>

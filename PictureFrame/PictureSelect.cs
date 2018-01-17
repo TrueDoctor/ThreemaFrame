@@ -51,7 +51,7 @@ namespace PictureFrame
             _pictures.Reverse();
 
             var _oldPics = _currentPics;
-            _currentPics = _pictures.Take(5).ToList();
+            _currentPics = _pictures.Take(10).ToList();
             if (!_oldPics.Exists(x=>x.name.Equals(_currentPics[0].name)))
                 _id = 0;
 
