@@ -1,21 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:p1="http://schemas.android.com/apk/res/android"
-    p1:orientation="vertical"
-    p1:layout_width="match_parent"
-    p1:layout_height="match_parent"
-    p1:id="@+id/linearLayout1"
-    p1:background="@android:color/black">
-    <ImageView
-        p1:src="@android:drawable/ic_menu_gallery"
-        p1:layout_width="match_parent"
-        p1:layout_height="match_parent"
-        p1:id="@+id/imageView"
-        p1:clickable="true"
-        p1:adjustViewBounds="true"
-        p1:scaleType="centerInside"
-        p1:baselineAlignBottom="false"
-        p1:backgroundTint="#ff000000"
-        p1:foregroundTint="#ff000000"
-        p1:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"
-        p1:background="@android:color/black" />
+<LinearLayout
+	xmlns:p1="http://schemas.android.com/apk/res/android"
+	p1:orientation="vertical"
+	p1:layout_width="match_parent"
+	p1:layout_height="match_parent"
+	p1:id="@+id/linearLayout1"
+	p1:background="@android:color/black">
+	<TextView
+		p1:text=" 24"
+		p1:textAppearance="?android:attr/textAppearanceLarge"
+		p1:layout_width="match_parent"
+		p1:layout_height="fill_parent"
+		p1:id="@+id/textView1"
+		p1:background="#fffbfbfb"
+		p1:textColor="#ffff0000"
+		p1:textAlignment="center"
+		p1:contextClickable="true"
+		p1:textSize="400sp"
+		p1:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" />
+	<ImageView
+		p1:src="@android:drawable/ic_menu_gallery"
+		p1:layout_width="match_parent"
+		p1:layout_height="match_parent"
+		p1:id="@+id/imageView"
+		p1:clickable="true"
+		p1:adjustViewBounds="true"
+		p1:scaleType="centerInside"
+		p1:baselineAlignBottom="false"
+		p1:backgroundTint="#ff000000"
+		p1:foregroundTint="#ff000000"
+		p1:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"
+		p1:background="@android:color/black" />
 </LinearLayout>

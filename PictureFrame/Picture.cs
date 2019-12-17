@@ -30,17 +30,24 @@ namespace PictureFrame
             //if(date==null)
             //    date = ex.GetAttribute(ExifInterface.TagDatetimeDigitized);
             //if (date == null)
-              //  date = ex.GetAttribute(ExifInterface.TagDatetimeOriginal);
-            
+            //  date = ex.GetAttribute(ExifInterface.TagDatetimeOriginal);
+
             //if (date == null)
             //date = ex.GetAttribute(ExifInterface.);
             //if (date == null)
-                //throw new System.Exception($"Das Bild {name} hat kein Datum.");
+            //throw new System.Exception($"Das Bild {name} hat kein Datum.");
 
             //Date = DateTime.ParseExact(ex.GetAttribute(ExifInterface.TagDatetime),"yyyy:MM:dd HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture);
             //date = DateTime.Parse(ex.GetAttribute(ExifInterface.TagDatetime));
             //orientation = ex.GetAttributeInt(ExifInterface.TagOrientation,0);
+            Date = System.IO.File.GetCreationTime(name);
             this.name = name;
+        }
+
+        public int ToInt()
+        {
+            var temp = this.name.Split('.').First();
+            return System.Convert.ToInt32(temp);
         }
     }
 }

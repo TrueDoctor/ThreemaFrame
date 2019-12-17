@@ -24,6 +24,7 @@ namespace PictureFrame
     {
         private static int _id;
         private static List<Picture> _pictures = new List<Picture>();
+        private static Queue<Picture> _history = new Queue<Picture>();
         private static List<Picture> _currentPics = new List<Picture>();
 
         private static void LoadPictures(string path)
@@ -34,10 +35,13 @@ namespace PictureFrame
 
             _pictures.Clear();
             if (files == null) return;
+
             foreach (File file in files)
             {
                 _pictures.Add(new Picture(file.AbsolutePath));
             }
+
+            var last = new Queue<int>();
             /*
             _pictures.Clear();
             foreach (var pic in _pictureList)
@@ -46,14 +50,16 @@ namespace PictureFrame
             }*/
             //_pictures.Sort((x, y) => DateTime.Compare(x.Date, y.Date));
 
-            _pictures.OrderBy(x => x.name);
+            //_pictures = _pictures.OrderBy(x => x.ToInt()).ToList();
 
             _pictures.Reverse();
 
             var _oldPics = _currentPics;
             _currentPics = _pictures.Take(10).ToList();
-            if (!_oldPics.Exists(x=>x.name.Equals(_currentPics[0].name)))
+            if (!_oldPics.Exists(x => x.name.Equals(_currentPics[0].name)))
+            {
                 _id = 0;
+            }
 
         }
 

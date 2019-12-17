@@ -8,11 +8,10 @@ namespace PictureFrame
 
         public static System.Timers.Timer reload;
 
-        public static int DefaultIntervall { get; } = 30000; 
+        public static int DefaultInterval { get; } = 60000; 
 
         public static void StartTimer(MainActivity o)
         {
-
             timer = new System.Timers.Timer();
             reload = new System.Timers.Timer();
             
@@ -20,7 +19,7 @@ namespace PictureFrame
             reload.Elapsed += PictureSelect.OnReload;
             //reload.Start();
 
-            timer.Interval = DefaultIntervall;
+            timer.Interval = DefaultInterval;
             timer.Elapsed += o.OnUpdate;
             timer.Start();
         }
